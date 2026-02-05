@@ -1,3 +1,5 @@
+const economiaCmd = require("./commands/economia");
+
 const { default: makeWASocket, useMultiFileAuthState } = require("@whiskeysockets/baileys");
 const qrcode = require("qrcode-terminal");
 
