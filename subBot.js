@@ -1,3 +1,5 @@
+const economiaCmd = require("./commands/economia");
+
 sock.ev.on("messages.upsert", async ({ messages }) => {
 
     const msg = messages[0];
