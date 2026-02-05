@@ -1,9 +1,9 @@
 {
   "name": "scp-whatsapp-bot",
   "version": "1.0.0",
-  "main": "scp-bot.js",
+  "main": "mainBot.js",
   "scripts": {
-    "start": "node scp-bot.js"
+    "start": "node mainBot.js"
   },
   "dependencies": {
     "@whiskeysockets/baileys": "^6.7.0",
