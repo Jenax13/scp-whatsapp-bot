@@ -1,0 +1,57 @@
+const { default: makeWASocket, useMultiFileAuthState } = require("@whiskeysockets/baileys");
+const qrcode = require("qrcode-terminal");
+const { crearSubBot } = require("./subBotManager");
+
+async function iniciarMainBot() {
+
+    const { state, saveCreds } =
+        await useMultiFileAuthState("sessions/SCP-001");
+
+    const sock = makeWASocket({ auth: state });
+
+    sock.ev.on("creds.update", saveCreds);
+
+    sock.ev.on("connection.update", ({ qr, connection }) => {
+
+        if (qr) qrcode.generate(qr, { small: true });
+
+        if (connection === "open")
+            console.log("☣️ SCP-001 activo");
+    });
+
+    sock.ev.on("messages.upsert", async ({ messages }) => {
+
+        const msg = messages[0];
+        if (!msg.message) return;
+
+        const texto =
+            msg.message.conversation ||
+            msg.message.extendedTextMessage?.text;
+
+        const jid = msg.key.remoteJid;
+
+        if (!texto) return;
+
+        // Crear sub-bot
+        if (texto === "!crear-subbot") {
+
+            const nombre = crearSubBot();
+
+            await sock.sendMessage(jid, {
+                text: `Nuevo sub-bot creado: ${nombre}`
+            });
+        }
+
+        // Menú
+        if (texto === "!scp") {
+
+            await sock.sendMessage(jid, {
+                text: "SCP-001 Sistema maestro activo"
+            });
+        }
+
+    });
+
+}
+
+iniciarMainBot();
