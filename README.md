@@ -85,10 +85,10 @@ node scp-bot.js
 ## 📁 Estructura del Proyecto
 
 📦 SCP-WA-BOT
-┣ 📜 scp-bot.js
-┣ 📜 package.json
-┣ 📁 sesiones
-┗ 📄 README.md
+┣📜 scp-bot.js
+┣📜 package.json
+┣📁 sesiones
+┗📄 README.md
 
 
 ---
